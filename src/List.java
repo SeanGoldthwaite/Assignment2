@@ -35,6 +35,9 @@ class EmptyL<E> extends List<E> {
     E getLast() throws NoSuchElementE {
         throw new NoSuchElementE();
     }
+    public String toString() {
+        return "{empty}";
+    }
 
     boolean contains(E elem) {
         return false;
@@ -79,6 +82,9 @@ class NodeL<E> extends List<E> {
 
     boolean contains(E elem) {
         return (data.equals(elem)) || rest.contains(elem);
+    }
+    public String toString() {
+        return data + " " + rest;
     }
 }
 
