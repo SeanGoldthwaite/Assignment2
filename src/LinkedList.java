@@ -1,5 +1,10 @@
 // Complete the implementation of this class
 
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 class LinkedList<E> implements LinkedListI<E> {
     private List<E> elements;
 
@@ -20,29 +25,40 @@ class LinkedList<E> implements LinkedListI<E> {
     }
 
     public void addLast(E elem) {
-        //elements = new NodeL<>(elements.getFirst(), elements.getRest().addLast(elem));
+        elements = elements.addLast(elem);
     }
 
     public E getFirst() throws NoSuchElementE {
-        if (elements.isEmpty())
-            throw new NoSuchElementE();
-        else
-            return elements.getFirst();
+        return elements.getFirst();
     }
 
     public E getLast() throws NoSuchElementE {
-        if (elements.isEmpty())
-            throw new NoSuchElementE();
-        else
-            return elements.getLast();
+        return elements.getLast();
     }
 
     public E removeFirst() throws NoSuchElementE {
         E temp = elements.getFirst();
-        if (elements.isEmpty())
-            throw new NoSuchElementE();
-        else
-            elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
-            return temp;
+        elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        return temp;
+    }
+    public String toString() {
+        return elements.toString();
+    }
+    public static void main(String[] args) throws NoSuchElementE{
+        ArrayList<Integer> vals = new ArrayList<>();
+        LinkedList<Integer> list = new LinkedList<>();
+        LinkedList<Integer> list2 = new LinkedList<>();
+        for (int i = 0; i < 100; i++) {
+            vals.add((int)(Math.random() * 1000));
+            list.addFirst(vals.get(i));
+            list.addLast(vals.get(i));
+        }
+        System.out.println(vals);
+        System.out.println(list);
+        System.out.println(list.getFirst());
+        System.out.println(list.removeFirst());
+        list.clear();
+        System.out.println(list);
+        System.out.println(list2);
     }
 }

@@ -8,22 +8,24 @@ class StackList<E> implements StackI<E> {
     }
 
     public void clear() {
-
+        elements = new EmptyL<>();
     }
 
     public boolean empty() {
-        return false;
+        return elements instanceof EmptyL;
     }
 
     public E peek() throws NoSuchElementE {
-        return null;
+        return elements.getFirst();
     }
 
     public E pop() throws NoSuchElementE {
-        return null;
+        E temp = elements.getFirst();
+        elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        return temp;
     }
 
     public void push(E item) {
-
+        elements = new NodeL<>(item, elements);
     }
 }
