@@ -10,22 +10,30 @@ class QueueList<E> implements QueueI<E> {
     }
 
     public void clear() {
-
+        elements = new EmptyL<>();
     }
 
     public void offer(E elem) {
-
+        elements = elements.addLast(elem);
     }
 
     public E poll() throws NoSuchElementE {
-        return null;
+        return elements.getFirst();
     }
 
     public E remove() throws NoSuchElementE {
-        return null;
+        E temp = elements.getFirst();
+        int length = elements.length();
+        if (length > 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        else if (length == 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), new EmptyL<>());
+        else
+            elements = new EmptyL<>();
+        return temp;
     }
 
     public int size() {
-        return 0;
+        return elements.length();
     }
 }

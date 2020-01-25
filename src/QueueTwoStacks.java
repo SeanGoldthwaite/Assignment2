@@ -10,22 +10,31 @@ class QueueTwoStacks<E> implements QueueI<E> {
     }
 
     public void clear() {
-
+        front.clear();
+        back.clear();
     }
 
     public void offer(E elem) {
-
+        front.push(elem);
     }
 
     public E poll() throws NoSuchElementE {
-        return null;
+        if (back.size() == 0) {
+            while (!front.empty())
+                back.push(front.pop());
+        }
+        return back.peek();
     }
 
     public E remove() throws NoSuchElementE {
-        return null;
+        if (back.size() == 0) {
+            while (!front.empty())
+                back.push(front.pop());
+        }
+        return back.pop();
     }
 
     public int size() {
-        return 0;
+        return front.size() + back.size();
     }
 }

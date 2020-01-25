@@ -1,5 +1,7 @@
 // Complete the implementation of this class
 
+import java.util.ArrayList;
+
 class StackList<E> implements StackI<E> {
     private List<E> elements;
 
@@ -21,11 +23,29 @@ class StackList<E> implements StackI<E> {
 
     public E pop() throws NoSuchElementE {
         E temp = elements.getFirst();
-        elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        int length = elements.length();
+        if (length > 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        else if (length == 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), new EmptyL<>());
+        else
+            elements = new EmptyL<>();
         return temp;
     }
-
     public void push(E item) {
         elements = new NodeL<>(item, elements);
+    }
+    public int size() {
+        return elements.length();
+    }
+    public static void main(String[] args) {
+        ArrayList<Integer> vals = new ArrayList<>();
+        StackList<Integer> stack = new StackList<>();
+        StackList<Integer> stack2 = new StackList<>();
+        for (int i = 0; i < 100; i++) {
+            vals.add((int)(Math.random() * 1000));
+            stack.push(vals.get(i));
+            stack2.push(vals.get(i));
+        }
     }
 }

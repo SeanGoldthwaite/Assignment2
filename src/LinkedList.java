@@ -38,7 +38,13 @@ class LinkedList<E> implements LinkedListI<E> {
 
     public E removeFirst() throws NoSuchElementE {
         E temp = elements.getFirst();
-        elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        int length = elements.length();
+        if (length > 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), elements.getRest().getRest());
+        else if (length == 2)
+            elements = new NodeL<>(elements.getRest().getFirst(), new EmptyL<>());
+        else
+            elements = new EmptyL<>();
         return temp;
     }
     public String toString() {
@@ -51,7 +57,7 @@ class LinkedList<E> implements LinkedListI<E> {
         for (int i = 0; i < 100; i++) {
             vals.add((int)(Math.random() * 1000));
             list.addFirst(vals.get(i));
-            list.addLast(vals.get(i));
+            list2.addLast(vals.get(i));
         }
         System.out.println(vals);
         System.out.println(list);
@@ -60,5 +66,8 @@ class LinkedList<E> implements LinkedListI<E> {
         list.clear();
         System.out.println(list);
         System.out.println(list2);
+        while (list2.size() > 0) {
+            System.out.println(list2.removeFirst());
+        }
     }
 }
